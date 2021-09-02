@@ -18,9 +18,9 @@ def weighted_choices(items: list, weights: list, k: int) -> list:
         raise ValueError('k не должно превышать количество всех элементов')
 
     # Взвешенное тасование: чем больше вес, тем больше шанс оказаться в начале списка
-    # random.random нельзя использовать по условию, поэтому тут 'random.randint(1, 10)'
+    # random.random нельзя использовать по условию, поэтому тут '(random.randint(1, 10) / 10)'
     order = sorted(range(len(items)),
-                   key=lambda i: randint(1, 10) ** (1.0 / weights[i]) if 0 < i < 1 else i)
+                   key=lambda i: (randint(1, 10) / 10) ** weights[i])
     return [items[i] for i in islice(order, k)]  # выбор первых k элементов
 
 
